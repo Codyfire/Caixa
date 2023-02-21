@@ -1,0 +1,946 @@
+
+<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+<edmx:DataServices m:DataServiceVersion="2.0">
+<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZGRCAUD_ALERTAS_SRV" xml:lang="es" sap:schema-version="1">
+<EntityType Name="InfoCodConclusion" sap:content-version="1">
+<Key>
+<PropertyRef Name="Id"/>
+</Key>
+<Property Name="Id" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="ID" sap:sortable="false"/>
+<Property Name="Incidencia" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Variable booleana (X=verdadero, -=falso, space=descon.)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Description" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Descripción" sap:sortable="false"/>
+<Property Name="Habilitado" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Variable booleana (X=verdadero, -=falso, space=descon.)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="InfoCodIncidence" sap:content-version="1">
+<Key>
+<PropertyRef Name="Id"/>
+</Key>
+<Property Name="Habilitado" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Variable booleana (X=verdadero, -=falso, space=descon.)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Id" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Description" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="InfoFinalAction" sap:content-version="1">
+<Key>
+<PropertyRef Name="Id"/>
+</Key>
+<Property Name="Action" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Objaud" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Variable booleana (X=verdadero, -=falso, space=descon.)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Id" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Habilitado" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Variable booleana (X=verdadero, -=falso, space=descon.)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="InfoDepartment" sap:content-version="1">
+<Key>
+<PropertyRef Name="Key"/>
+</Key>
+<Property Name="Key" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DepartmentName" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Nombre" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Company" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Empresa para portal de Auditoría" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Department" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Departamento" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<NavigationProperty Name="InfoVisibilityDepSet" Relationship="ZGRCAUD_ALERTAS_SRV.To_Departments_Visibility" FromRole="FromRole_To_Departments_Visibility" ToRole="ToRole_To_Departments_Visibility"/>
+</EntityType>
+<EntityType Name="InfoAlertUsersDeep" sap:content-version="1">
+<Key>
+<PropertyRef Name="UserId"/>
+</Key>
+<Property Name="UserId" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="ID de usuario" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="InfoAlertDepartmentsDeep" sap:content-version="1">
+<Key>
+<PropertyRef Name="Key"/>
+</Key>
+<Property Name="Key" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Company" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Empresa para portal de Auditoría" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Department" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Departamento" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CompanyName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DepartmentName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="InfoStatus" sap:content-version="1">
+<Key>
+<PropertyRef Name="Objtyp"/>
+</Key>
+<Property Name="Objtyp" Type="Edm.String" Nullable="false" MaxLength="6" sap:unicode="false" sap:label="Business object" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Langu" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Idioma" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Estado" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="StatusT" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Nombre" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="InfoRole" sap:content-version="1">
+<Key>
+<PropertyRef Name="RoleGroup"/>
+</Key>
+<Property Name="RoleGroup" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Grupo de Roles" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Roles" Type="Edm.String" Nullable="false" MaxLength="128" sap:unicode="false" sap:label="Roles Involucrados" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="InfoUserRol" sap:content-version="1">
+<Key>
+<PropertyRef Name="Uname"/>
+<PropertyRef Name="Rol"/>
+</Key>
+<Property Name="Uname" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Usuario" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Rol" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Rol" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="Note" sap:content-version="1">
+<Key>
+<PropertyRef Name="Key"/>
+<PropertyRef Name="HostBoKey"/>
+<PropertyRef Name="HostNodeKey"/>
+<PropertyRef Name="HostKey"/>
+</Key>
+<Property Name="Key" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ParentKey" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="RootKey" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ParentNote" Type="Edm.Guid" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="TypeKey" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Tipo" sap:creatable="false" sap:updatable="false"/>
+<Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Estado" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Text" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CreateTime" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Cronomarcador" sap:creatable="false" sap:updatable="false"/>
+<Property Name="CreatedBy" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="Usuario" sap:creatable="false" sap:updatable="false"/>
+<Property Name="ChangeTime" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Cronomarcador" sap:creatable="false" sap:updatable="false"/>
+<Property Name="LastChangedBy" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Usuario" sap:creatable="false" sap:updatable="false"/>
+<Property Name="HostBoKey" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="Business Object" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="HostNodeKey" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="Node" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="HostKey" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CreatedByName" Type="Edm.String" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+<Property Name="LastChangedByName" Type="Edm.String" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+</EntityType>
+<EntityType Name="Attachment" sap:content-version="1">
+<Key>
+<PropertyRef Name="Key"/>
+<PropertyRef Name="HostBoKey"/>
+<PropertyRef Name="HostNodeKey"/>
+<PropertyRef Name="HostKey"/>
+</Key>
+<Property Name="Key" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false"/>
+<Property Name="ParentKey" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="RootKey" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="6" sap:unicode="false" sap:label="Business object" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ReferenceKey" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Master" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="VERDADERO" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="RelatedObjtyp" Type="Edm.String" Nullable="false" MaxLength="6" sap:unicode="false" sap:label="Business object" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="RelatedObjKey" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ViewId" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="ID de vista" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="RefValidFrom" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="Cronomarcador" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="RefValidTo" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="Cronomarcador" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CreatedBy" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Usuario" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CreatedAt" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="Cronomarcador" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="UpdatedBy" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Usuario" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="UpdatedAt" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="Cronomarcador" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="RemovedBy" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Usuario" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="RemovedAt" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="Cronomarcador" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="HostBoKey" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="Geschäftsobjekt" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="HostNodeKey" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="Knoten" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="HostKey" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ID" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="ID" sap:creatable="false" sap:updatable="false"/>
+<Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Código" sap:creatable="false" sap:updatable="false"/>
+<Property Name="ObjectSeq" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Secuencia" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Nombre" sap:creatable="false" sap:updatable="false"/>
+<Property Name="Phase" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Categoría" sap:creatable="false" sap:updatable="false"/>
+<Property Name="ObjectStatus" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Estado" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="RelatedObjId" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="RelatedObjName" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Nombre" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="HostId" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="HostName" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Nombre" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CreateTime" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Cronomarcador" sap:creatable="false" sap:updatable="false"/>
+<Property Name="CreateBy" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Usuario" sap:creatable="false" sap:updatable="false"/>
+<Property Name="ChangeTime" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Cronomarcador" sap:creatable="false" sap:updatable="false"/>
+<Property Name="ChangeBy" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Usuario" sap:creatable="false" sap:updatable="false"/>
+<Property Name="CreateByName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="CREA_UNAME_FNAME" sap:creatable="false" sap:updatable="false"/>
+<Property Name="ChangeByName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="LCHG_UNAME_FNAME" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+<Property Name="ServiceUrl" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="SERVICE_URL" sap:creatable="false" sap:updatable="false"/>
+<Property Name="CreatedByFname" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="CREATED_BY_FNAME" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="UpdatedByFname" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="UPDATED_BY_FNAME" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="RemovedByFname" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="REMOVED_BY_FNAME" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="WorkPaper" sap:content-version="1">
+<Key>
+<PropertyRef Name="HostBOKey"/>
+<PropertyRef Name="HostNodeKey"/>
+<PropertyRef Name="HostKey"/>
+<PropertyRef Name="Key"/>
+</Key>
+<Property Name="Seq" Type="Edm.String" MaxLength="5" sap:unicode="false" sap:label="Secuencia" sap:creatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="6" sap:unicode="false" sap:label="Business object" sap:creatable="false" sap:updatable="false"/>
+<Property Name="ReferenceKey" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="Clave" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="HostBOKey" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="Business Object" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="HostNodeKey" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="Node" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="HostKey" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Key" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ID" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="ID" sap:creatable="false" sap:updatable="false"/>
+<Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Código" sap:creatable="false" sap:updatable="false"/>
+<Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="100" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:unicode="false" sap:label="Nombre" sap:creatable="false" sap:updatable="false"/>
+<Property Name="Phase" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Categoría" sap:creatable="false" sap:updatable="false"/>
+<Property Name="ServiceURL" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+<Property Name="CreateTime" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Cronomarcador" sap:creatable="false" sap:updatable="false"/>
+<Property Name="CreateBy" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Usuario" sap:creatable="false" sap:updatable="false"/>
+<Property Name="CreateByName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+<Property Name="ChangeTime" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Cronomarcador" sap:creatable="false" sap:updatable="false"/>
+<Property Name="ChangeBy" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Usuario" sap:creatable="false" sap:updatable="false"/>
+<Property Name="ChangeByName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="DocWorkPaper" sap:content-version="1">
+<Key>
+<PropertyRef Name="Key"/>
+</Key>
+<Property Name="Key" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ParentKey" Type="Edm.Binary" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="RootKey" Type="Edm.Binary" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ID" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="ID" sap:creatable="false" sap:updatable="false"/>
+<Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Código" sap:creatable="false" sap:updatable="false"/>
+<Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="100" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:unicode="false" sap:label="Nombre" sap:creatable="false" sap:updatable="false"/>
+<Property Name="Phase" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Categoría" sap:creatable="false" sap:updatable="false"/>
+<Property Name="MasterKey" Type="Edm.Binary" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false"/>
+<Property Name="CreatedTime" Type="Edm.DateTime" Precision="7" m:FC_TargetPath="SyndicationPublished" m:FC_KeepInContent="true" sap:unicode="false" sap:label="Cronomarcador" sap:creatable="false" sap:updatable="false"/>
+<Property Name="CreatedBy" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Usuario" sap:creatable="false" sap:updatable="false"/>
+<Property Name="ChangedTime" Type="Edm.DateTime" Precision="7" m:FC_TargetPath="SyndicationUpdated" m:FC_KeepInContent="true" sap:unicode="false" sap:label="Cronomarcador" sap:creatable="false" sap:updatable="false"/>
+<Property Name="ChangedBy" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Usuario" sap:creatable="false" sap:updatable="false"/>
+<Property Name="ChangedByName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+<Property Name="CreatedByName" Type="Edm.String" Nullable="false" m:FC_TargetPath="SyndicationAuthorName" m:FC_KeepInContent="true" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+<Property Name="Mark" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Marca" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="MarkText" Type="Edm.String" Nullable="false" MaxLength="80" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Seq" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Secuencia" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<NavigationProperty Name="FileVersion" Relationship="ZGRCAUD_ALERTAS_SRV.DocWorkPaper_To_FileVersions" FromRole="FromRole_DocWorkPaper_To_FileVersions" ToRole="ToRole_DocWorkPaper_To_FileVersions"/>
+<NavigationProperty Name="File" Relationship="ZGRCAUD_ALERTAS_SRV.DocWorkPaper_To_File" FromRole="FromRole_DocWorkPaper_To_File" ToRole="ToRole_DocWorkPaper_To_File"/>
+</EntityType>
+<EntityType Name="InfoRemoteActions" sap:content-version="1">
+<Key>
+<PropertyRef Name="Key"/>
+</Key>
+<Property Name="Key" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Contract" Type="Edm.String" Nullable="false" MaxLength="23" sap:unicode="false" sap:label="CONTRACT" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="AlertKey" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="AlertName" Type="Edm.String" Nullable="false" MaxLength="150" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Employee" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="ID de usuario" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Nif" Type="Edm.String" Nullable="false" MaxLength="9" sap:unicode="false" sap:label="NIF" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Company" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="COMPANY" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Department" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Departamento" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Sistem" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="SISTEM" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Estado" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="StatusDate" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Modificado el" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Import" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="2" sap:unicode="false" sap:label="Importe" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CompanyName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DepartmentName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="EmployeeName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="EMPLOYEE_NAME" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Theme" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Tema" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<NavigationProperty Name="NoteSet" Relationship="ZGRCAUD_ALERTAS_SRV.To_Remote_Actions_Notes" FromRole="FromRole_To_Remote_Actions_Notes" ToRole="ToRole_To_Remote_Actions_Notes"/>
+<NavigationProperty Name="Attachments" Relationship="ZGRCAUD_ALERTAS_SRV.Remote_Actions_To_Attachments" FromRole="FromRole_Remote_Actions_To_Attachments" ToRole="ToRole_Remote_Actions_To_Attachments"/>
+</EntityType>
+<EntityType Name="InfoRemoteActionsDeep" sap:content-version="1">
+<Key>
+<PropertyRef Name="Key"/>
+</Key>
+<Property Name="AlertName" Type="Edm.String" Nullable="false" MaxLength="150" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Contract" Type="Edm.String" Nullable="false" MaxLength="23" sap:unicode="false" sap:label="CONTRACT" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Key" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="StatusDate" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Modificado el" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="AlertKey" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Employee" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="ID de usuario" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Nif" Type="Edm.String" Nullable="false" MaxLength="9" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Company" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Empresa para portal de Auditoría" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Department" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Departamento" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Sistem" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Estado" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Import" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="2" sap:unicode="false" sap:label="Importe" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Theme" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Tema" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<NavigationProperty Name="InfoRemoteActionsUsersDeep" Relationship="ZGRCAUD_ALERTAS_SRV.To_Remote_Actions_Users" FromRole="FromRole_To_Remote_Actions_Users" ToRole="ToRole_To_Remote_Actions_Users"/>
+</EntityType>
+<EntityType Name="InfoRemoteActionsUsersDeep" sap:content-version="1">
+<Key>
+<PropertyRef Name="Key"/>
+</Key>
+<Property Name="Key" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="UserId" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="InfoAlertUsers" sap:content-version="1">
+<Key>
+<PropertyRef Name="UserId"/>
+</Key>
+<Property Name="FullName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="UserId" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="ID de usuario" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="InfoAlertRisk" sap:content-version="1">
+<Key>
+<PropertyRef Name="Key"/>
+</Key>
+<Property Name="Key" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Id" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Nombre" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="InfoDepartments" sap:content-version="1">
+<Key>
+<PropertyRef Name="DbKey"/>
+</Key>
+<Property Name="DbKey" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Company" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Empresa para portal de Auditoría" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Department" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Departamento" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CompanyName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DepartmentName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="UserIdResp1" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="ID de usuario" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Fullnameresp1" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="UserIdResp2" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="ID de usuario" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Fullnameresp2" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="InfoDepartmentDeep" sap:content-version="1">
+<Key>
+<PropertyRef Name="Key"/>
+</Key>
+<Property Name="Key" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DepartmentName" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Nombre" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Company" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Empresa para portal de Auditoría" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Department" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Departamento" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<NavigationProperty Name="InfoVisibilityDepDeep" Relationship="ZGRCAUD_ALERTAS_SRV.To_Dep_Vis_Deep" FromRole="FromRole_To_Dep_Vis_Deep" ToRole="ToRole_To_Dep_Vis_Deep"/>
+</EntityType>
+<EntityType Name="InfoVisibilityDep" sap:content-version="1">
+<Key>
+<PropertyRef Name="Key"/>
+</Key>
+<Property Name="Key" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DepartmentName" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Nombre" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Company" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Empresa para portal de Auditoría" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Department" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Departamento" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="InfoVisibilityDepDeep" sap:content-version="1">
+<Key>
+<PropertyRef Name="Key"/>
+</Key>
+<Property Name="Key" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DepartmentName" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Nombre" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Company" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Empresa para portal de Auditoría" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Department" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Departamento" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="InfoAlertDepartments" sap:content-version="1">
+<Key>
+<PropertyRef Name="Key"/>
+</Key>
+<Property Name="Key" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Company" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Empresa para portal de Auditoría" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Department" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Departamento" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CompanyName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DepartmentName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="InfoAlert" sap:content-version="1">
+<Key>
+<PropertyRef Name="Key"/>
+</Key>
+<Property Name="CodContratoTf7" Type="Edm.String" Nullable="false" MaxLength="23" sap:unicode="false" sap:label="Contrato" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DepartmentDtName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="AlertName" Type="Edm.String" Nullable="false" MaxLength="150" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="AudDepName" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Nombre" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DepartmentDanName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Assigned" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="ID de usuario" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="AssignedName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="AuditDepartment" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Departamento" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="BackCheck" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Variable booleana (X=verdadero, -=falso, space=descon.)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CodAction" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CodConclusion" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CodIncidencia" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Commentary" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Company" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Empresa para portal de Auditoría" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CompanyDan" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Empresa para portal de Auditoría" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CompanyDt" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Empresa para portal de Auditoría" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CompanyName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Confiden" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Por defecto" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Contract" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Contrato" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DanDepartmentName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Department" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Departamento" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DepartmentDan" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Departamento" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DepartmentDt" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Departamento" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DepartmentName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DescrAccion" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DescrConclusion" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DescrIncidencia" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DtDepartmentName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Employee" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="ID de usuario" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Fullname" Type="Edm.String" Nullable="false" MaxLength="80" sap:unicode="false" sap:label="Nombre completo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="History" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Variable booleana (X=verdadero, -=falso, space=descon.)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Id" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Import" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="2" sap:unicode="false" sap:label="Importe" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="IncidenceDate" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Fecha" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Key" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Manual" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="VERDADERO" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Nif" Type="Edm.String" Nullable="false" MaxLength="13" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Numpers" Type="Edm.String" Nullable="false" MaxLength="13" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="PredefLetter" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Carta Predefinida" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Resumen" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Sistem" Type="Edm.String" Nullable="false" MaxLength="25" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Estado" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="StatusDate" Type="Edm.String" MaxLength="21" sap:unicode="false" sap:label="Modificado el" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Tipo de Alerta" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="TypeKey" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<NavigationProperty Name="InfoAlertDepartments" Relationship="ZGRCAUD_ALERTAS_SRV.To_Alert_Departments" FromRole="FromRole_To_Alert_Departments" ToRole="ToRole_To_Alert_Departments"/>
+<NavigationProperty Name="InfoAlertUsers" Relationship="ZGRCAUD_ALERTAS_SRV.To_Alert_Users" FromRole="FromRole_To_Alert_Users" ToRole="ToRole_To_Alert_Users"/>
+<NavigationProperty Name="NoteSet" Relationship="ZGRCAUD_ALERTAS_SRV.To_Alert_Notes" FromRole="FromRole_To_Alert_Notes" ToRole="ToRole_To_Alert_Notes"/>
+<NavigationProperty Name="Attachments" Relationship="ZGRCAUD_ALERTAS_SRV.Alert_To_Attachments" FromRole="FromRole_Alert_To_Attachments" ToRole="ToRole_Alert_To_Attachments"/>
+<NavigationProperty Name="InfoRemoteActions" Relationship="ZGRCAUD_ALERTAS_SRV.To_Alert_RemAct_Key" FromRole="FromRole_To_Alert_RemAct_Key" ToRole="ToRole_To_Alert_RemAct_Key"/>
+<NavigationProperty Name="InfoActivities" Relationship="ZGRCAUD_ALERTAS_SRV.To_Alert_Activities" FromRole="FromRole_To_Alert_Activities" ToRole="ToRole_To_Alert_Activities"/>
+<NavigationProperty Name="InfoIndicators" Relationship="ZGRCAUD_ALERTAS_SRV.To_Alert_Indicators" FromRole="FromRole_To_Alert_Indicators" ToRole="ToRole_To_Alert_Indicators"/>
+<NavigationProperty Name="InfoAnnexs" Relationship="ZGRCAUD_ALERTAS_SRV.To_Alert_Annexs" FromRole="FromRole_To_Alert_Annexs" ToRole="ToRole_To_Alert_Annexs"/>
+</EntityType>
+<EntityType Name="InfoAlertDeep" sap:content-version="1">
+<Key>
+<PropertyRef Name="Key"/>
+</Key>
+<Property Name="CodContratoTf7" Type="Edm.String" Nullable="false" MaxLength="23" sap:unicode="false" sap:label="Contrato" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CompanyDtName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="AlertName" Type="Edm.String" Nullable="false" MaxLength="150" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DepartmentDtName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CompanyDan" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Empresa para portal de Auditoría" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Assigned" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="ID de usuario" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CompanyDanName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DepartmentDan" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Departamento" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DepartmentDanName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="AuditDepartment" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Departamento" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="BackCheck" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Variable booleana (X=verdadero, -=falso, space=descon.)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CodAction" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CodConclusion" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CodIncidencia" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Commentary" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Company" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Empresa para portal de Auditoría" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CompanyDt" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Empresa para portal de Auditoría" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CompanyName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Confiden" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Por defecto" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Contract" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Contrato" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Department" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Departamento" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DepartmentDt" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Departamento" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DepartmentName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DtDepartmentName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Employee" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="ID de usuario" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Fullname" Type="Edm.String" Nullable="false" MaxLength="80" sap:unicode="false" sap:label="Nombre completo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Id" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Import" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="2" sap:unicode="false" sap:label="Importe" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="IncidenceDate" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Fecha" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Key" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Manual" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="VERDADERO" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Nif" Type="Edm.String" Nullable="false" MaxLength="9" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Numpers" Type="Edm.String" Nullable="false" MaxLength="13" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="PredefLetter" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Carta Predefinida" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Resumen" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Sistem" Type="Edm.String" Nullable="false" MaxLength="25" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Estado" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="StatusDate" Type="Edm.String" MaxLength="21" sap:unicode="false" sap:label="Modificado el" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Tipo de Alerta" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<NavigationProperty Name="InfoAlertDepartmentsDeep" Relationship="ZGRCAUD_ALERTAS_SRV.To_Alert_Departments_Deep" FromRole="FromRole_To_Alert_Departments_Deep" ToRole="ToRole_To_Alert_Departments_Deep"/>
+<NavigationProperty Name="InfoAlertUsersDeep" Relationship="ZGRCAUD_ALERTAS_SRV.To_Alert_Users_Deep" FromRole="FromRole_To_Alert_Users_Deep" ToRole="ToRole_To_Alert_Users_Deep"/>
+</EntityType>
+<EntityType Name="InfoAlertType" sap:content-version="1">
+<Key>
+<PropertyRef Name="Key"/>
+</Key>
+<Property Name="AuditDepartment" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Departamento" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="150" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Key" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Tipo de Alerta" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="PredefLetter" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Carta predefinida" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<NavigationProperty Name="Attachments" Relationship="ZGRCAUD_ALERTAS_SRV.AlertType_To_Attachments" FromRole="FromRole_AlertType_To_Attachments" ToRole="ToRole_AlertType_To_Attachments"/>
+<NavigationProperty Name="InfoAlertDepartments" Relationship="ZGRCAUD_ALERTAS_SRV.To_Alert_Type_Departments" FromRole="FromRole_To_Alert_Type_Departments" ToRole="ToRole_To_Alert_Type_Departments"/>
+<NavigationProperty Name="InfoAlertUsers" Relationship="ZGRCAUD_ALERTAS_SRV.To_Alert_Users_Type" FromRole="FromRole_To_Alert_Users_Type" ToRole="ToRole_To_Alert_Users_Type"/>
+</EntityType>
+<EntityType Name="InfoAlertTypeDeep" sap:content-version="1">
+<Key>
+<PropertyRef Name="Key"/>
+</Key>
+<Property Name="AuditDepartment" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Departamento" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="150" sap:unicode="false" sap:label="Descripción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Key" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Tipo de Alerta" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="PredefLetter" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Carta predefinida" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<NavigationProperty Name="InfoAlertTypeDepartmentDeep" Relationship="ZGRCAUD_ALERTAS_SRV.To_Alert_Type_Departments_Deep" FromRole="FromRole_To_Alert_Type_Departments_Deep" ToRole="ToRole_To_Alert_Type_Departments_Deep"/>
+<NavigationProperty Name="InfoAlertTypeUsersDeep" Relationship="ZGRCAUD_ALERTAS_SRV.To_Alert_Users_Type_Deep" FromRole="FromRole_To_Alert_Users_Type_Deep" ToRole="ToRole_To_Alert_Users_Type_Deep"/>
+</EntityType>
+<EntityType Name="File" sap:content-version="1">
+<Key>
+<PropertyRef Name="Key"/>
+</Key>
+<Property Name="Key" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ParentKey" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Name" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="MimeType" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<NavigationProperty Name="FileVersionSet" Relationship="ZGRCAUD_ALERTAS_SRV.File_To_Versions" FromRole="FromRole_File_To_Versions" ToRole="ToRole_File_To_Versions"/>
+</EntityType>
+<EntityType Name="FileVersion" sap:content-version="1">
+<Key>
+<PropertyRef Name="Key"/>
+<PropertyRef Name="Seq"/>
+</Key>
+<Property Name="Key" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ParentKey" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="RootKey" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Seq" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Secuencia" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="MimeCode" Type="Edm.String" Nullable="false" MaxLength="128" sap:unicode="false" sap:label="Tipo MIME" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FileName" Type="Edm.String" Nullable="false" MaxLength="255" sap:unicode="false" sap:label="Componente" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CreaDateTime" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Cronomarcador" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="LchgDateTime" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Cronomarcador" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CreaUnameFname" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Full user name of creator" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="LchgUnameFname" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Full user name of last changer" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="InfoActivities" sap:content-version="1">
+<Key>
+<PropertyRef Name="Objectid"/>
+<PropertyRef Name="Changenr"/>
+</Key>
+<Property Name="Text" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Objectid" Type="Edm.String" Nullable="false" MaxLength="90" sap:unicode="false" sap:label="Valor de objeto" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Changenr" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Nº documento" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Username" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Usuario" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="NameFirst" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Nombre" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Udate" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Fecha" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Utime" Type="Edm.Time" Nullable="false" Precision="0" sap:unicode="false" sap:label="Hora" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Fname" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Nombre campo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Ftext" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Descripción breve" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FNew" Type="Edm.String" Nullable="false" MaxLength="254" sap:unicode="false" sap:label="Valor nuevo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FOld" Type="Edm.String" Nullable="false" MaxLength="254" sap:unicode="false" sap:label="Valor anterior" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Chngind" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="ID modificación" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="InfoChangeType" sap:content-version="1">
+<Key>
+<PropertyRef Name="DomvalueL"/>
+</Key>
+<Property Name="DomvalueL" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Val.inferior" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Ddtext" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Descrip.breve" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="InfoIndicators" sap:content-version="1">
+<Key>
+<PropertyRef Name="Key"/>
+</Key>
+<Property Name="DesCentroPpal" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Des. Centro" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CodContratoTf7" Type="Edm.String" Nullable="false" MaxLength="23" sap:unicode="false" sap:label="Contrato" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Nif" Type="Edm.String" Nullable="false" MaxLength="13" sap:unicode="false" sap:label="NIF" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CodigoIndicador" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Tipo de Alerta" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Key" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Fullname" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="FULLNAME" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FkTrabajo" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="PkXIndicador" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FkIndicador" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="FK_INDICADOR" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FkNumperso" Type="Edm.String" Nullable="false" MaxLength="13" sap:unicode="false" sap:label="FK_NUMPERSO" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FkFecha" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Fecha" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FkCentro" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="FK_CENTRO" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FkEmpleado" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="FK_EMPLEADO" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FkContrato" Type="Edm.String" Nullable="false" MaxLength="23" sap:unicode="false" sap:label="FK_CONTRATO" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DesSistema" Type="Edm.String" Nullable="false" MaxLength="25" sap:unicode="false" sap:label="DES_SISTEMA" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FkCentroEmpresa" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="FK_CENTRO_EMPRESA" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ImpMaximo" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="2" sap:unicode="false" sap:label="IMP_MAXIMO" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="NumOcurrencia" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="NUM_OCURRENCIA" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FechaBaja" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Fecha" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FechaCaptura" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Fecha" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FechaValor" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Fecha" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CodCentresp" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="COD_CENTRESP" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CodCentpal" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="COD_CENTPAL" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="RiesgoVivoT1" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="2" sap:unicode="false" sap:label="RIESGO_VIVO_T1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="RiesgoVivoTn" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="2" sap:unicode="false" sap:label="RIESGO_VIVO_TN" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="NumContratos" Type="Edm.String" Nullable="false" MaxLength="23" sap:unicode="false" sap:label="NUM_CONTRATOS" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Ordtit" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="ORDTIT" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="IndMorosidad" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="IND_MOROSIDAD" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ImpRiesgo" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="2" sap:unicode="false" sap:label="IMP_RIESGO" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Areacont" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="AREACONT" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Numcont" Type="Edm.String" Nullable="false" MaxLength="13" sap:unicode="false" sap:label="NUMCONT" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Digicon" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="DIGICON" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ImpAlerta" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="2" sap:unicode="false" sap:label="IMP_ALERTA" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FechaCarga" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Cronomarcador" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="InfoAnnexs" sap:content-version="1">
+<Key>
+<PropertyRef Name="Key"/>
+</Key>
+<Property Name="Key" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ParentKey" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="NodeID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="PkXIndicador" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="PkFecha" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Fecha" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="PkIndicador" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="PK_INDICADOR" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="PkInfaco" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="PK_INFACO" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DesIndicadorCastellano" Type="Edm.String" Nullable="false" MaxLength="250" sap:unicode="false" sap:label="DES_INDICADOR_CASTELLANO" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Valor" Type="Edm.String" Nullable="false" MaxLength="250" sap:unicode="false" sap:label="VALOR" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FechaCarga" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Cronomarcador" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="ExportJob" sap:content-version="1">
+<Key>
+<PropertyRef Name="Key"/>
+</Key>
+<Property Name="Key" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="Clave" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ObjectType" Type="Edm.String" Nullable="false" MaxLength="6" sap:unicode="false" sap:label="Tipo de objeto" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Scenario" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Escenario" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Template" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Modelo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CreatedAt" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Creado a las" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CreatedBy" Type="Edm.String" Nullable="false" MaxLength="12" m:FC_TargetPath="SyndicationAuthorName" m:FC_KeepInContent="true" sap:unicode="false" sap:label="Nombre de usuario" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ChangedAt" Type="Edm.DateTime" Nullable="false" Precision="7" ConcurrencyMode="Fixed" sap:unicode="false" sap:label="Modificado a las" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ChangedBy" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Modificado por" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ChangedByName" Type="Edm.String" Nullable="false" MaxLength="80" sap:unicode="false" sap:label="Modificado por" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CreatedByName" Type="Edm.String" Nullable="false" MaxLength="80" sap:unicode="false" sap:label="Creado por" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="MimeType" Type="Edm.String" Nullable="false" MaxLength="128" sap:unicode="false" sap:label="Tipo MIME" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ExportType" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Tipo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Connector" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Conector" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<NavigationProperty Name="Sorts" Relationship="ZGRCAUD_ALERTAS_SRV.ExportJob_To_SortOption" FromRole="FromRole_ExportJob_To_SortOption" ToRole="ToRole_ExportJob_To_SortOption"/>
+<NavigationProperty Name="File" Relationship="ZGRCAUD_ALERTAS_SRV.ExportJob_To_ExportJobFile" FromRole="FromRole_ExportJob_To_ExportJobFile" ToRole="ToRole_ExportJob_To_ExportJobFile"/>
+<NavigationProperty Name="Selections" Relationship="ZGRCAUD_ALERTAS_SRV.ExportJob_To_SelectionRange" FromRole="FromRole_ExportJob_To_SelectionRange" ToRole="ToRole_ExportJob_To_SelectionRange"/>
+</EntityType>
+<EntityType Name="ExportJobFile" m:HasStream="true" sap:content-version="1">
+<Key>
+<PropertyRef Name="Key"/>
+</Key>
+<Property Name="Key" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="Clave" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="MimeType" Type="Edm.String" Nullable="false" MaxLength="128" sap:unicode="false" sap:label="Tipo MIME" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="SelectionRange" sap:content-version="1">
+<Key>
+<PropertyRef Name="Key"/>
+<PropertyRef Name="HostBoKey"/>
+<PropertyRef Name="HostNodeKey"/>
+<PropertyRef Name="HostKey"/>
+</Key>
+<Property Name="Key" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="Clave" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ParentKey" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="Clave interl." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="RootKey" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="Clave raíz" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Field" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Campo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Sign" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Signo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Opt" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Opción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Low" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Bajo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="High" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Alto" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="HostBoKey" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="Clave BO host" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="HostNodeKey" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="Clave de nodo host" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="HostKey" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="Clave host" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Option" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Opción" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="SortOption" sap:content-version="1">
+<Key>
+<PropertyRef Name="Key"/>
+</Key>
+<Property Name="Key" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="Clave" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ParentKey" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="Clave superior" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="RootKey" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="Clave raíz" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="AttributeName" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Nombre de atributo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Ascending" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Ascendente" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<Association Name="To_Alert_Departments_Deep" sap:content-version="1">
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoAlertDeep" Multiplicity="1" Role="FromRole_To_Alert_Departments_Deep"/>
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoAlertDepartmentsDeep" Multiplicity="*" Role="ToRole_To_Alert_Departments_Deep"/>
+</Association>
+<Association Name="To_Alert_Users_Deep" sap:content-version="1">
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoAlertDeep" Multiplicity="1" Role="FromRole_To_Alert_Users_Deep"/>
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoAlertUsersDeep" Multiplicity="*" Role="ToRole_To_Alert_Users_Deep"/>
+</Association>
+<Association Name="To_Departments_Visibility" sap:content-version="1">
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoDepartment" Multiplicity="*" Role="FromRole_To_Departments_Visibility"/>
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoVisibilityDep" Multiplicity="*" Role="ToRole_To_Departments_Visibility"/>
+</Association>
+<Association Name="AlertType_To_Attachments" sap:content-version="1">
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoAlertType" Multiplicity="1" Role="FromRole_AlertType_To_Attachments"/>
+<End Type="ZGRCAUD_ALERTAS_SRV.WorkPaper" Multiplicity="*" Role="ToRole_AlertType_To_Attachments"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_AlertType_To_Attachments">
+<PropertyRef Name="Key"/>
+</Principal>
+<Dependent Role="ToRole_AlertType_To_Attachments">
+<PropertyRef Name="HostKey"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="To_Alert_Type_Departments" sap:content-version="1">
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoAlertType" Multiplicity="1" Role="FromRole_To_Alert_Type_Departments"/>
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoAlertDepartments" Multiplicity="*" Role="ToRole_To_Alert_Type_Departments"/>
+</Association>
+<Association Name="To_Alert_Users_Type" sap:content-version="1">
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoAlertType" Multiplicity="1" Role="FromRole_To_Alert_Users_Type"/>
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoAlertUsers" Multiplicity="*" Role="ToRole_To_Alert_Users_Type"/>
+</Association>
+<Association Name="DocWorkPaper_To_File" sap:content-version="1">
+<End Type="ZGRCAUD_ALERTAS_SRV.DocWorkPaper" Multiplicity="1" Role="FromRole_DocWorkPaper_To_File"/>
+<End Type="ZGRCAUD_ALERTAS_SRV.File" Multiplicity="*" Role="ToRole_DocWorkPaper_To_File"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_DocWorkPaper_To_File">
+<PropertyRef Name="Key"/>
+</Principal>
+<Dependent Role="ToRole_DocWorkPaper_To_File">
+<PropertyRef Name="ParentKey"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="DocWorkPaper_To_FileVersions" sap:content-version="1">
+<End Type="ZGRCAUD_ALERTAS_SRV.DocWorkPaper" Multiplicity="1" Role="FromRole_DocWorkPaper_To_FileVersions"/>
+<End Type="ZGRCAUD_ALERTAS_SRV.FileVersion" Multiplicity="*" Role="ToRole_DocWorkPaper_To_FileVersions"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_DocWorkPaper_To_FileVersions">
+<PropertyRef Name="Key"/>
+</Principal>
+<Dependent Role="ToRole_DocWorkPaper_To_FileVersions">
+<PropertyRef Name="RootKey"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="To_Alert_Departments" sap:content-version="1">
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoAlert" Multiplicity="1" Role="FromRole_To_Alert_Departments"/>
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoAlertDepartments" Multiplicity="*" Role="ToRole_To_Alert_Departments"/>
+</Association>
+<Association Name="To_Alert_Users" sap:content-version="1">
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoAlert" Multiplicity="1" Role="FromRole_To_Alert_Users"/>
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoAlertUsers" Multiplicity="*" Role="ToRole_To_Alert_Users"/>
+</Association>
+<Association Name="To_Alert_Notes" sap:content-version="1">
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoAlert" Multiplicity="1" Role="FromRole_To_Alert_Notes"/>
+<End Type="ZGRCAUD_ALERTAS_SRV.Note" Multiplicity="*" Role="ToRole_To_Alert_Notes"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_To_Alert_Notes">
+<PropertyRef Name="Key"/>
+</Principal>
+<Dependent Role="ToRole_To_Alert_Notes">
+<PropertyRef Name="HostKey"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="Alert_To_Attachments" sap:content-version="1">
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoAlert" Multiplicity="1" Role="FromRole_Alert_To_Attachments"/>
+<End Type="ZGRCAUD_ALERTAS_SRV.WorkPaper" Multiplicity="*" Role="ToRole_Alert_To_Attachments"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_Alert_To_Attachments">
+<PropertyRef Name="Key"/>
+</Principal>
+<Dependent Role="ToRole_Alert_To_Attachments">
+<PropertyRef Name="HostKey"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="To_Alert_RemAct_Key" sap:content-version="1">
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoAlert" Multiplicity="1" Role="FromRole_To_Alert_RemAct_Key"/>
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoRemoteActions" Multiplicity="*" Role="ToRole_To_Alert_RemAct_Key"/>
+</Association>
+<Association Name="To_Alert_Activities" sap:content-version="1">
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoAlert" Multiplicity="1" Role="FromRole_To_Alert_Activities"/>
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoActivities" Multiplicity="*" Role="ToRole_To_Alert_Activities"/>
+</Association>
+<Association Name="To_Alert_Indicators" sap:content-version="1">
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoAlert" Multiplicity="1" Role="FromRole_To_Alert_Indicators"/>
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoIndicators" Multiplicity="*" Role="ToRole_To_Alert_Indicators"/>
+</Association>
+<Association Name="To_Alert_Annexs" sap:content-version="1">
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoAlert" Multiplicity="1" Role="FromRole_To_Alert_Annexs"/>
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoAnnexs" Multiplicity="*" Role="ToRole_To_Alert_Annexs"/>
+</Association>
+<Association Name="ExportJob_To_ExportJobFile" sap:content-version="1">
+<End Type="ZGRCAUD_ALERTAS_SRV.ExportJob" Multiplicity="1" Role="FromRole_ExportJob_To_ExportJobFile"/>
+<End Type="ZGRCAUD_ALERTAS_SRV.ExportJobFile" Multiplicity="1" Role="ToRole_ExportJob_To_ExportJobFile"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_ExportJob_To_ExportJobFile">
+<PropertyRef Name="Key"/>
+</Principal>
+<Dependent Role="ToRole_ExportJob_To_ExportJobFile">
+<PropertyRef Name="Key"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="ExportJob_To_SelectionRange" sap:content-version="1">
+<End Type="ZGRCAUD_ALERTAS_SRV.ExportJob" Multiplicity="1" Role="FromRole_ExportJob_To_SelectionRange"/>
+<End Type="ZGRCAUD_ALERTAS_SRV.SelectionRange" Multiplicity="*" Role="ToRole_ExportJob_To_SelectionRange"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_ExportJob_To_SelectionRange">
+<PropertyRef Name="Key"/>
+</Principal>
+<Dependent Role="ToRole_ExportJob_To_SelectionRange">
+<PropertyRef Name="HostKey"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="ExportJob_To_SortOption" sap:content-version="1">
+<End Type="ZGRCAUD_ALERTAS_SRV.ExportJob" Multiplicity="1" Role="FromRole_ExportJob_To_SortOption"/>
+<End Type="ZGRCAUD_ALERTAS_SRV.SortOption" Multiplicity="*" Role="ToRole_ExportJob_To_SortOption"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_ExportJob_To_SortOption">
+<PropertyRef Name="Key"/>
+</Principal>
+<Dependent Role="ToRole_ExportJob_To_SortOption">
+<PropertyRef Name="Key"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="To_Dep_Vis_Deep" sap:content-version="1">
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoDepartmentDeep" Multiplicity="*" Role="FromRole_To_Dep_Vis_Deep"/>
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoVisibilityDepDeep" Multiplicity="*" Role="ToRole_To_Dep_Vis_Deep"/>
+</Association>
+<Association Name="To_Remote_Actions_Notes" sap:content-version="1">
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoRemoteActions" Multiplicity="1" Role="FromRole_To_Remote_Actions_Notes"/>
+<End Type="ZGRCAUD_ALERTAS_SRV.Note" Multiplicity="*" Role="ToRole_To_Remote_Actions_Notes"/>
+</Association>
+<Association Name="Remote_Actions_To_Attachments" sap:content-version="1">
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoRemoteActions" Multiplicity="1" Role="FromRole_Remote_Actions_To_Attachments"/>
+<End Type="ZGRCAUD_ALERTAS_SRV.WorkPaper" Multiplicity="*" Role="ToRole_Remote_Actions_To_Attachments"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_Remote_Actions_To_Attachments">
+<PropertyRef Name="Key"/>
+</Principal>
+<Dependent Role="ToRole_Remote_Actions_To_Attachments">
+<PropertyRef Name="HostKey"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="To_Alert_Type_Departments_Deep" sap:content-version="1">
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoAlertTypeDeep" Multiplicity="1" Role="FromRole_To_Alert_Type_Departments_Deep"/>
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoDepartmentDeep" Multiplicity="*" Role="ToRole_To_Alert_Type_Departments_Deep"/>
+</Association>
+<Association Name="To_Alert_Users_Type_Deep" sap:content-version="1">
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoAlertTypeDeep" Multiplicity="1" Role="FromRole_To_Alert_Users_Type_Deep"/>
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoAlertUsersDeep" Multiplicity="*" Role="ToRole_To_Alert_Users_Type_Deep"/>
+</Association>
+<Association Name="To_Remote_Actions_Users" sap:content-version="1">
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoRemoteActionsDeep" Multiplicity="1" Role="FromRole_To_Remote_Actions_Users"/>
+<End Type="ZGRCAUD_ALERTAS_SRV.InfoRemoteActionsUsersDeep" Multiplicity="*" Role="ToRole_To_Remote_Actions_Users"/>
+</Association>
+<Association Name="File_To_Versions" sap:content-version="1">
+<End Type="ZGRCAUD_ALERTAS_SRV.File" Multiplicity="1" Role="FromRole_File_To_Versions"/>
+<End Type="ZGRCAUD_ALERTAS_SRV.FileVersion" Multiplicity="*" Role="ToRole_File_To_Versions"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_File_To_Versions">
+<PropertyRef Name="Key"/>
+</Principal>
+<Dependent Role="ToRole_File_To_Versions">
+<PropertyRef Name="ParentKey"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<EntityContainer Name="ZGRCAUD_ALERTAS_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+<EntitySet Name="InfoCodConclusionSet" EntityType="ZGRCAUD_ALERTAS_SRV.InfoCodConclusion" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="InfoCodIncidenceSet" EntityType="ZGRCAUD_ALERTAS_SRV.InfoCodIncidence" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="InfoFinalActionSet" EntityType="ZGRCAUD_ALERTAS_SRV.InfoFinalAction" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="InfoDepartmentSet" EntityType="ZGRCAUD_ALERTAS_SRV.InfoDepartment" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="InfoAlertUsersDeepSet" EntityType="ZGRCAUD_ALERTAS_SRV.InfoAlertUsersDeep" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="InfoAlertDepartmentsDeepSet" EntityType="ZGRCAUD_ALERTAS_SRV.InfoAlertDepartmentsDeep" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="InfoStatusSet" EntityType="ZGRCAUD_ALERTAS_SRV.InfoStatus" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="InfoRoleSet" EntityType="ZGRCAUD_ALERTAS_SRV.InfoRole" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="InfoUserRolSet" EntityType="ZGRCAUD_ALERTAS_SRV.InfoUserRol" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="NoteSet" EntityType="ZGRCAUD_ALERTAS_SRV.Note" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="AttachmentSet" EntityType="ZGRCAUD_ALERTAS_SRV.Attachment" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="WorkPaperSet" EntityType="ZGRCAUD_ALERTAS_SRV.WorkPaper" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="DocWorkPaperSet" EntityType="ZGRCAUD_ALERTAS_SRV.DocWorkPaper" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="InfoRemoteActionsSet" EntityType="ZGRCAUD_ALERTAS_SRV.InfoRemoteActions" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="InfoRemoteActionsDeepSet" EntityType="ZGRCAUD_ALERTAS_SRV.InfoRemoteActionsDeep" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="InfoRemoteActionsUsersDeepSet" EntityType="ZGRCAUD_ALERTAS_SRV.InfoRemoteActionsUsersDeep" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="InfoAlertUsersSet" EntityType="ZGRCAUD_ALERTAS_SRV.InfoAlertUsers" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="InfoAlertRiskSet" EntityType="ZGRCAUD_ALERTAS_SRV.InfoAlertRisk" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="InfoDepartmentsSet" EntityType="ZGRCAUD_ALERTAS_SRV.InfoDepartments" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="InfoDepartmentDeepSet" EntityType="ZGRCAUD_ALERTAS_SRV.InfoDepartmentDeep" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="InfoVisibilityDepSet" EntityType="ZGRCAUD_ALERTAS_SRV.InfoVisibilityDep" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="InfoVisibilityDepDeepSet" EntityType="ZGRCAUD_ALERTAS_SRV.InfoVisibilityDepDeep" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="InfoAlertDepartmentsSet" EntityType="ZGRCAUD_ALERTAS_SRV.InfoAlertDepartments" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="InfoAlertSet" EntityType="ZGRCAUD_ALERTAS_SRV.InfoAlert" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="InfoAlertDeepSet" EntityType="ZGRCAUD_ALERTAS_SRV.InfoAlertDeep" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="InfoAlertTypeSet" EntityType="ZGRCAUD_ALERTAS_SRV.InfoAlertType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="InfoAlertTypeDeepSet" EntityType="ZGRCAUD_ALERTAS_SRV.InfoAlertTypeDeep" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="FileSet" EntityType="ZGRCAUD_ALERTAS_SRV.File" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="FileVersionSet" EntityType="ZGRCAUD_ALERTAS_SRV.FileVersion" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="InfoActivitiesSet" EntityType="ZGRCAUD_ALERTAS_SRV.InfoActivities" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="InfoChangeTypeSet" EntityType="ZGRCAUD_ALERTAS_SRV.InfoChangeType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="InfoIndicatorsSet" EntityType="ZGRCAUD_ALERTAS_SRV.InfoIndicators" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="InfoAnnexsSet" EntityType="ZGRCAUD_ALERTAS_SRV.InfoAnnexs" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="ExportJobSet" EntityType="ZGRCAUD_ALERTAS_SRV.ExportJob" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+<EntitySet Name="ExportJobFileSet" EntityType="ZGRCAUD_ALERTAS_SRV.ExportJobFile" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+<EntitySet Name="SelectionRangeSet" EntityType="ZGRCAUD_ALERTAS_SRV.SelectionRange" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+<EntitySet Name="SortOptionSet" EntityType="ZGRCAUD_ALERTAS_SRV.SortOption" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+<AssociationSet Name="DocWorkPaper_To_File_AssocSet" Association="ZGRCAUD_ALERTAS_SRV.DocWorkPaper_To_File" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="DocWorkPaperSet" Role="FromRole_DocWorkPaper_To_File"/>
+<End EntitySet="FileSet" Role="ToRole_DocWorkPaper_To_File"/>
+</AssociationSet>
+<AssociationSet Name="AlertType_To_AttachmentsSet" Association="ZGRCAUD_ALERTAS_SRV.AlertType_To_Attachments" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="InfoAlertTypeSet" Role="FromRole_AlertType_To_Attachments"/>
+<End EntitySet="WorkPaperSet" Role="ToRole_AlertType_To_Attachments"/>
+</AssociationSet>
+<AssociationSet Name="To_Alert_Notes" Association="ZGRCAUD_ALERTAS_SRV.To_Alert_Notes" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="InfoAlertSet" Role="FromRole_To_Alert_Notes"/>
+<End EntitySet="NoteSet" Role="ToRole_To_Alert_Notes"/>
+</AssociationSet>
+<AssociationSet Name="To_Alert_AnnexsSet" Association="ZGRCAUD_ALERTAS_SRV.To_Alert_Annexs" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="InfoAlertSet" Role="FromRole_To_Alert_Annexs"/>
+<End EntitySet="InfoAnnexsSet" Role="ToRole_To_Alert_Annexs"/>
+</AssociationSet>
+<AssociationSet Name="To_Alert_Departments" Association="ZGRCAUD_ALERTAS_SRV.To_Alert_Departments" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="InfoAlertSet" Role="FromRole_To_Alert_Departments"/>
+<End EntitySet="InfoAlertDepartmentsSet" Role="ToRole_To_Alert_Departments"/>
+</AssociationSet>
+<AssociationSet Name="To_Alert_Departments_Deep" Association="ZGRCAUD_ALERTAS_SRV.To_Alert_Departments_Deep" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="InfoAlertDeepSet" Role="FromRole_To_Alert_Departments_Deep"/>
+<End EntitySet="InfoAlertDepartmentsDeepSet" Role="ToRole_To_Alert_Departments_Deep"/>
+</AssociationSet>
+<AssociationSet Name="To_Alert_Type_Departments_Deep" Association="ZGRCAUD_ALERTAS_SRV.To_Alert_Type_Departments_Deep" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="InfoAlertTypeDeepSet" Role="FromRole_To_Alert_Type_Departments_Deep"/>
+<End EntitySet="InfoDepartmentDeepSet" Role="ToRole_To_Alert_Type_Departments_Deep"/>
+</AssociationSet>
+<AssociationSet Name="To_Alert_Users_Type" Association="ZGRCAUD_ALERTAS_SRV.To_Alert_Users_Type" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="InfoAlertTypeSet" Role="FromRole_To_Alert_Users_Type"/>
+<End EntitySet="InfoAlertUsersSet" Role="ToRole_To_Alert_Users_Type"/>
+</AssociationSet>
+<AssociationSet Name="To_Alert_Type_DepartmentsSet" Association="ZGRCAUD_ALERTAS_SRV.To_Alert_Type_Departments" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="InfoAlertTypeSet" Role="FromRole_To_Alert_Type_Departments"/>
+<End EntitySet="InfoAlertDepartmentsSet" Role="ToRole_To_Alert_Type_Departments"/>
+</AssociationSet>
+<AssociationSet Name="To_Alert_Users_Type_DeepSet" Association="ZGRCAUD_ALERTAS_SRV.To_Alert_Users_Type_Deep" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="InfoAlertTypeDeepSet" Role="FromRole_To_Alert_Users_Type_Deep"/>
+<End EntitySet="InfoAlertUsersDeepSet" Role="ToRole_To_Alert_Users_Type_Deep"/>
+</AssociationSet>
+<AssociationSet Name="To_Alert_IndicatorsSet" Association="ZGRCAUD_ALERTAS_SRV.To_Alert_Indicators" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="InfoAlertSet" Role="FromRole_To_Alert_Indicators"/>
+<End EntitySet="InfoIndicatorsSet" Role="ToRole_To_Alert_Indicators"/>
+</AssociationSet>
+<AssociationSet Name="File_To_VersionSet" Association="ZGRCAUD_ALERTAS_SRV.File_To_Versions" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="FileSet" Role="FromRole_File_To_Versions"/>
+<End EntitySet="FileVersionSet" Role="ToRole_File_To_Versions"/>
+</AssociationSet>
+<AssociationSet Name="ExportJob_To_SortOption_AssocSet" Association="ZGRCAUD_ALERTAS_SRV.ExportJob_To_SortOption" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="ExportJobSet" Role="FromRole_ExportJob_To_SortOption"/>
+<End EntitySet="SortOptionSet" Role="ToRole_ExportJob_To_SortOption"/>
+</AssociationSet>
+<AssociationSet Name="To_Remote_Actions_UsersSet" Association="ZGRCAUD_ALERTAS_SRV.To_Remote_Actions_Users" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="InfoRemoteActionsDeepSet" Role="FromRole_To_Remote_Actions_Users"/>
+<End EntitySet="InfoRemoteActionsUsersDeepSet" Role="ToRole_To_Remote_Actions_Users"/>
+</AssociationSet>
+<AssociationSet Name="Alert_To_AttachmentsSet" Association="ZGRCAUD_ALERTAS_SRV.Alert_To_Attachments" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="InfoAlertSet" Role="FromRole_Alert_To_Attachments"/>
+<End EntitySet="WorkPaperSet" Role="ToRole_Alert_To_Attachments"/>
+</AssociationSet>
+<AssociationSet Name="To_Departments_VisibilitySet" Association="ZGRCAUD_ALERTAS_SRV.To_Departments_Visibility" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="InfoDepartmentSet" Role="FromRole_To_Departments_Visibility"/>
+<End EntitySet="InfoVisibilityDepSet" Role="ToRole_To_Departments_Visibility"/>
+</AssociationSet>
+<AssociationSet Name="To_Alert_ActivitiesSet" Association="ZGRCAUD_ALERTAS_SRV.To_Alert_Activities" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="InfoAlertSet" Role="FromRole_To_Alert_Activities"/>
+<End EntitySet="InfoActivitiesSet" Role="ToRole_To_Alert_Activities"/>
+</AssociationSet>
+<AssociationSet Name="ExportJob_To_ExportJobFileSet" Association="ZGRCAUD_ALERTAS_SRV.ExportJob_To_ExportJobFile" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="ExportJobSet" Role="FromRole_ExportJob_To_ExportJobFile"/>
+<End EntitySet="ExportJobFileSet" Role="ToRole_ExportJob_To_ExportJobFile"/>
+</AssociationSet>
+<AssociationSet Name="To_Alert_RemAct_KeySet" Association="ZGRCAUD_ALERTAS_SRV.To_Alert_RemAct_Key" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="InfoAlertSet" Role="FromRole_To_Alert_RemAct_Key"/>
+<End EntitySet="InfoRemoteActionsSet" Role="ToRole_To_Alert_RemAct_Key"/>
+</AssociationSet>
+<AssociationSet Name="To_Remote_Actions_NotesSet" Association="ZGRCAUD_ALERTAS_SRV.To_Remote_Actions_Notes" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="InfoRemoteActionsSet" Role="FromRole_To_Remote_Actions_Notes"/>
+<End EntitySet="NoteSet" Role="ToRole_To_Remote_Actions_Notes"/>
+</AssociationSet>
+<AssociationSet Name="To_Alert_Users" Association="ZGRCAUD_ALERTAS_SRV.To_Alert_Users" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="InfoAlertSet" Role="FromRole_To_Alert_Users"/>
+<End EntitySet="InfoAlertUsersSet" Role="ToRole_To_Alert_Users"/>
+</AssociationSet>
+<AssociationSet Name="To_Dep_Vis_DeepSet" Association="ZGRCAUD_ALERTAS_SRV.To_Dep_Vis_Deep" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="InfoDepartmentDeepSet" Role="FromRole_To_Dep_Vis_Deep"/>
+<End EntitySet="InfoVisibilityDepDeepSet" Role="ToRole_To_Dep_Vis_Deep"/>
+</AssociationSet>
+<AssociationSet Name="Remote_Actions_To_AttachmentsSet" Association="ZGRCAUD_ALERTAS_SRV.Remote_Actions_To_Attachments" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="InfoRemoteActionsSet" Role="FromRole_Remote_Actions_To_Attachments"/>
+<End EntitySet="WorkPaperSet" Role="ToRole_Remote_Actions_To_Attachments"/>
+</AssociationSet>
+<AssociationSet Name="ExportJob_To_SelectionRangeSet" Association="ZGRCAUD_ALERTAS_SRV.ExportJob_To_SelectionRange" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="ExportJobSet" Role="FromRole_ExportJob_To_SelectionRange"/>
+<End EntitySet="SelectionRangeSet" Role="ToRole_ExportJob_To_SelectionRange"/>
+</AssociationSet>
+<AssociationSet Name="DocWorkPaper_To_FileVersions_AssocSet" Association="ZGRCAUD_ALERTAS_SRV.DocWorkPaper_To_FileVersions" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="DocWorkPaperSet" Role="FromRole_DocWorkPaper_To_FileVersions"/>
+<End EntitySet="FileVersionSet" Role="ToRole_DocWorkPaper_To_FileVersions"/>
+</AssociationSet>
+<AssociationSet Name="To_Alert_Users_Deep" Association="ZGRCAUD_ALERTAS_SRV.To_Alert_Users_Deep" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="InfoAlertDeepSet" Role="FromRole_To_Alert_Users_Deep"/>
+<End EntitySet="InfoAlertUsersDeepSet" Role="ToRole_To_Alert_Users_Deep"/>
+</AssociationSet>
+<FunctionImport Name="GetAlerts" ReturnType="Collection(ZGRCAUD_ALERTAS_SRV.InfoAlertDeep)" EntitySet="InfoAlertDeepSet" m:HttpMethod="GET"/>
+<FunctionImport Name="getInfoDepartments" ReturnType="Collection(ZGRCAUD_ALERTAS_SRV.InfoDepartments)" EntitySet="InfoDepartmentsSet" m:HttpMethod="GET">
+<Parameter Name="Filtro" Type="Edm.String" Mode="In" MaxLength="50"/>
+<Parameter Name="IdDept" Type="Edm.String" Mode="In" MaxLength="10"/>
+</FunctionImport>
+</EntityContainer>
+<atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="https://sapriast17.lacaixa.es:44300/sap/opu/odata/sap/ZGRCAUD_ALERTAS_SRV/$metadata"/>
+<atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="https://sapriast17.lacaixa.es:44300/sap/opu/odata/sap/ZGRCAUD_ALERTAS_SRV/$metadata"/>
+</Schema>
+</edmx:DataServices>
+</edmx:Edmx>
